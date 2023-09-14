@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;900&display=swap');
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body{
+  background-image: url(https://s3.ap-south-1.amazonaws.com/kalvi-education.github.io/front-end-web-development/superover-bg.png);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+#logo{
+  
+    width: 180px;
+    height: 70px;
+    margin-top: 29px;
+}
+.ball{
+  display: inline-flex;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: white;
+  margin: 5px;
+  color: black;
+  line-height: 30px;
+  font-weight: 600;
+  font-size: 20px;
+  text-align: center;
+  padding: 10px;
+}
+#chart{
+  display: flex;
+  margin-top: 100px;
+  justify-content: space-evenly;
+
+}
+.ind{
+  background-color: #244CA3;
+  width: 450px;
+  height: 350px;
+  font-size: 55px;
+  text-align: center;
+  border-radius: 20px;
+
+}
+.pak{
+  background-color: #3EA238;
+  width: 450px;
+  height: 350px;
+  font-size: 55px;
+  text-align: center;
+  border-radius: 20px;
+}
+.button{
+width: 100px;
+display: inline-flex;
+margin-top: 100px;
+margin: 100px 30px;
+cursor: pointer;
+}
+.button:active{
+  animation: clickbutton 0.3s ease-in-out ;
+}
+@keyframes clickbutton {
+  0%{
+    transform: scale(1);
+  }
+  50%{
+    transform: scale(0.9);
+  }
+  100%{
+    transform: scale(1);
+  }
+}
+.scoreboard{
+  font-size: 70px;
+}
