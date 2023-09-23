@@ -3,12 +3,12 @@ var strikeButton = document.querySelector("#strike")
 // reset button
 var resetButton = document.querySelector("#reset")
 // score tag
-var team1score_tag = document.getElementById("score-team1")
-var team2score_tag = document.getElementById("score-team2")
+var team1score_tag = document.getElementById("team1-score")
+var team2score_tag = document.getElementById("team2-score")
 
 // wickets tags
-var team1Wicket_tag = document.getElementById("wicket-team1")
-var team2Wicket_tag = document.getElementById("wicket-team2")
+var team1Wicket_tag = document.getElementById("team1-wicket")
+var team2Wicket_tag = document.getElementById("team2-wicket")
 
 // audio variables
 var strikeAudio = new Audio("http://bit.ly/so-ball-hit")
@@ -46,7 +46,7 @@ strikeButton.addEventListener("click", strikeButtonClicked)
   // pak batting
   if(turn == 2){
     team2BallsFaced++;
-    var ball = document.querySelector(`#team2-superover div:nth-child(${team2BallsFaced})`)
+    var ball = document.querySelector(`#team2sup div:nth-child(${team2BallsFaced})`)
     console.log(ball)
     ball.innerHTML = randomValue;
 
@@ -73,7 +73,7 @@ strikeButton.addEventListener("click", strikeButtonClicked)
   if(turn == 1)
   {
     team1BallsFaced++;
-    var ball = document.querySelector(`#team1-superover div:nth-child(${team1BallsFaced})`)
+    var ball = document.querySelector(`#team1sup div:nth-child(${team1BallsFaced})`)
     ball.innerHTML = randomValue;
 // if random element is wicket then increase wicket count by 1 or just add that random value to total score of team-1
     if(randomValue == "W")

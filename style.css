@@ -45,7 +45,7 @@ h1{
   margin: 5px;
   color: black;
   font-size: 2em;
-  font-weight: bold;
+  font-weight: 900;
 }
 .balls{
   display: flex;
