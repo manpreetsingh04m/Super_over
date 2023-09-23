@@ -1,115 +1,133 @@
-// Strike Buttons 
-var strikeButton=document.querySelector('#strike');
+// strike button
+var strikeButton = document.querySelector("#strike")
+// reset button
+var resetButton = document.querySelector("#reset")
+// score tag
+var team1score_tag = document.getElementById("score-team1")
+var team2score_tag = document.getElementById("score-team2")
 
-// Reset Button
-var resetButton=document.querySelector('#reset');
+// wickets tags
+var team1Wicket_tag = document.getElementById("wicket-team1")
+var team2Wicket_tag = document.getElementById("wicket-team2")
 
-// Team Score
-var team1Score_tag=document.getElementById('score_team1');
-var team2Score_tag=document.getElementById('score_team2');
+// audio variables
+var strikeAudio = new Audio("http://bit.ly/so-ball-hit")
+var gameOverAudio = new Audio("http://bit.ly/so-crowd-cheer")
 
-// Team  Wicket 
-var team1Wicket_tag=document.getElementById('wicket_team1');
-var team2Wicket_tag=document.getElementById('wicket_team2');
+// variables to keep track of game
+var team1Score = 0;
+var team2score = 0;
+var team1Wickets = 0;
+var team2Wickets = 0;
+var team1BallsFaced = 0;
+var team2BallsFaced = 0;
+var turn = 1;
 
-// Audio Generated
-var strikeAudio = new Audio("http://bit.ly/so-ball-hit");
-var gameoverAudio = new Audio("http://bit.ly/so-crowd-cheer");
+var  possibleOutcomes = [0,1,2,3,4,5,6,"W"]
 
-// Variable
-var team1Score=0;
-var team2Score=0;
-var team1Wicket=0;
-var team2Wicket=0;
-var team1BallsFaced=0;
-var team2BallsFaced=0;
-var turn =1;
+strikeButton.addEventListener("click", strikeButtonClicked)
 
-var possibleOutcome=[0,1,2,3,4,6,"W"];
+  function strikeButtonClicked()
+  {
+    // Audio Play
+  strikeAudio.pause(); //pause the previuos playing audio
+  strikeAudio.currentTime = 0; // bring the time to 0
+  strikeAudio.play();
 
-strikeButton.addEventListener("click",strikeButtonClicked)
-function strikeButtonClicked(){
-// Audio Play
-strikeAudio.pause()
-strikeAudio.currentTime = 0;
-strikeAudio.play()
-// Random Values
-var randomness=Math.random();
-var random1=randomness*possibleOutcome.length
-var randomIndex=Math.floor(random1)
-var randomVariable=possibleOutcome[randomIndex];
-// India batting
-if (turn==1){
-  // Add ball by using ++
-  team1BallsFaced++;
-  // Use query selector for accessing the div tag so run could be update on the basis of random randomVariable
-var ball=document.querySelector(`#team1sup div:nth-child(${team1BallsFaced})`)
-// Add inner HTML to add the random variable 
-ball.innerHTML=randomVariable
-if(randomVariable=="W"){
-  team1Wicket++;
-}
-else{
-  team1Score+=randomVariable;
-}
-if(team1BallsFaced==6||team1Wicket==2){
-  turn=2;
-}
-updateScore()
-}
-// PAK Batting
-if (turn==2){
-  // Add ball by using ++
-  team2BallsFaced++;
-  // Use query selector for accessing the div tag so run could be update on the basis of random randomVariable
-var ball=document.querySelector(`#team2sup div:nth-child(${team2BallsFaced})`)
-// Add inner HTML to add the random variable 
-ball.innerHTML=randomVariable
-if(randomVariable=="W"){
-  team2Wicket++;
-}
-else{
-  team2Score+=randomVariable;
-}
-if(team2BallsFaced==6||team2Wicket==2){
-  turn=3;
-  setTimeout(() =>{
-  gameover();
-  },10)
-}
-updateScore()
-}
-}
-function updateScore() {
-  team1Score_tag.innerHTML = team1Score;
-  team2Score_tag.innerHTML = team2Score;
-  team1Wicket_tag.innerHTML = team1Wicket;
-  team2Wicket_tag.innerHTML = team2Wicket;
-}
-function gameover(){
-  if(team1Score>team2Score){
-    alert("INDIA WON")
+
+  // chosing random value
+  var randomness = Math.random()
+  var random1 = randomness *possibleOutcomes.length
+  var randomIndex = Math.floor(random1)
+
+
+  var randomValue = possibleOutcomes[randomIndex]
+
+  // pak batting
+  if(turn == 2){
+    team2BallsFaced++;
+    var ball = document.querySelector(`#team2-superover div:nth-child(${team2BallsFaced})`)
+    console.log(ball)
+    ball.innerHTML = randomValue;
+
+    if(randomValue == "W")
+    {
+      team2Wickets++;
+    }
+    else{
+      team2score = team2score + randomValue;
+    }
+
+    if(team2score > team1Score || team2Wickets == 2 || team2BallsFaced == 6){
+      turn = 3;
+
+      setTimeout(() => {
+        gameOver();
+      },10);
+
+    }
+    updateScore()
   }
-  else if(team2Score>team1Score){
-    alert ("PAKISTAN WON");
-  }
-  else{
-    alert("DRAW GAME!");
-  }
-  gameoverAudio.play();
-  document.querySelectorAll(".ball").forEach(e=>{
-    if(e.innerHTML==""){
-    e.innerHTML="X";
-    e.style.backgroundColor='grey'
-  }
-  })
   
+// India Batting
+  if(turn == 1)
+  {
+    team1BallsFaced++;
+    var ball = document.querySelector(`#team1-superover div:nth-child(${team1BallsFaced})`)
+    ball.innerHTML = randomValue;
+// if random element is wicket then increase wicket count by 1 or just add that random value to total score of team-1
+    if(randomValue == "W")
+    {
+      team1Wickets++;
+    }
+    else{
+      team1Score = team1Score + randomValue;
+    }
+
+    if(team1BallsFaced == 6 || team1Wickets == 2)
+    {
+      turn = 2;
+    }
+    updateScore();
+
+  }
 }
 
+function updateScore(){
+  team1score_tag.innerHTML = team1Score;
+  team1Wicket_tag.innerHTML = team1Wickets
+  team2score_tag.innerHTML = team2score
+  team2Wicket_tag.innerHTML = team2Wickets
+}
 
+function gameOver(){
+  if(team1Score>team2score)
+  {
+    alert("INDIA WINS")
+  }
+  else if(team2score > team1Score){
+    alert("PAKISTAN WINS")
 
+  }
+  else
+  alert("Its a Tie")
 
-resetButton.addEventListener("click",resetfunction)
-function resetfunction(){
+  document.querySelectorAll(".ball").forEach(e=>{
+    if(e.innerHTML == "")
+    {
+      e.innerHTML = "X"
+      e.style.backgroundColor = "grey"
+    }
+  })
+
+  gameOverAudio.pause(); //pause the previuos playing audio
+  gameOverAudio.currentTime = 0; // bring the time to 0
+  gameOverAudio.play();
+
+}
+
+resetButton.addEventListener("click", resetFunction)
+function resetFunction()
+{
   window.location.reload()
 }
