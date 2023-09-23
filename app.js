@@ -23,7 +23,7 @@ var team1BallsFaced = 0;
 var team2BallsFaced = 0;
 var turn = 1;
 
-var  possibleOutcomes = [0,1,2,3,4,5,6,"W"]
+var  possibleOutcomes = [0,1,2,3,4,6,"W"]
 
 strikeButton.addEventListener("click", strikeButtonClicked)
 
